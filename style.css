@@ -317,3 +317,46 @@ footer {
     font-size: 20px;
     font-weight: bold;
 }
+
+
+
+/* home page er background image & animation */
+.welcome {
+    height: 420px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    background-size: cover;
+    background-position: center;
+
+    animation: changeBackground 9s infinite;
+}
+@keyframes changeBackground {
+
+    0% {
+        background-image: url("images/carousel_image/1.jpg");
+    }
+
+    33.33% {
+        background-image: url("images/carousel_image/1.jpg");
+    }
+
+    33.34% {
+        background-image: url("images/carousel_image/2.jpg");
+    }
+
+    66.66% {
+        background-image: url("images/carousel_image/2.jpg");
+    }
+
+    66.67% {
+        background-image: url("images/carousel_image/3.jpg");
+    }
+
+    100% {
+        background-image: url("images/carousel_image/3.jpg");
+    }
+}
