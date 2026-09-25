@@ -849,61 +849,61 @@ if (productImage) {
 // ===============================
 
 const cartProducts = document.getElementById("cartProducts");
+const cartSummary = document.getElementById("cartSummary");
+
+function formatNumber(amount) {
+    return amount;
+}
 
 if (cartProducts) {
 
-    const savedProduct =
-        localStorage.getItem("cartProduct");
+    const savedProduct = localStorage.getItem("cartProduct");
 
     if (savedProduct) {
 
-        const product =
-            JSON.parse(savedProduct);
+        const product = JSON.parse(savedProduct);
 
+        // render left column (items)
         cartProducts.innerHTML = `
-
             <div class="cart-item">
-
                 <div class="cart-image">
-                    <img src="${product.image}"
-                         alt="${product.name}">
+                    <img src="${product.image}" alt="${product.name}">
                 </div>
-
                 <div class="cart-info">
-
                     <h2>${product.name}</h2>
-
-                    <p>
-                        Category: ${product.category}
-                    </p>
-
-                    <p>
-                        Price: ${product.price}
-                    </p>
-
+                    <p>Category: ${product.category}</p>
+                    <p class="item-price">Price: ${product.price}</p>
                     <label>Quantity:</label>
-
-                    <input type="number"
-                           value="1"
-                           min="1">
-
-                    <br><br>
-
-                    <button class="button"
-                            onclick="removeFromCart()">
-                        Remove
-                    </button>
-
+                    <input type="number" class="item-qty" value="1" min="1">
+                    <p class="item-total"><b>Total: ${product.price}</b></p>
+                    <a href="#" class="remove" onclick="removeFromCart()">Remove</a>
                 </div>
-
             </div>
-
         `;
 
-    } else {
+        // populate summary
+        // remove HTML numeric entities like &#2547; before extracting digits
+        const priceNumeric = parseInt(String(product.price).replace(/&#\d+;?/g, '').replace(/[^0-9]/g, '')) || 0;
+        const qtyInput = document.querySelector('.item-qty');
+        const itemTotalEl = document.querySelector('.item-total');
 
-        cartProducts.innerHTML =
-            "<h2>Your cart is empty.</h2>";
+        function updateSummary() {
+            const qty = parseInt(qtyInput.value) || 1;
+            const subtotal = priceNumeric * qty;
+            const delivery = subtotal > 0 ? 100 : 0;
+            const total = subtotal + delivery;
+
+            cartSummary.querySelector('.summary-subtotal').textContent = `Subtotal: ৳${subtotal}`;
+            cartSummary.querySelector('.summary-delivery').textContent = `Delivery: ৳${delivery}`;
+            cartSummary.querySelector('.summary-total').textContent = `Total: ৳${total}`;
+            itemTotalEl.innerHTML = `<b>Total: ৳${subtotal}</b>`;
+        }
+
+        qtyInput.addEventListener('input', updateSummary);
+        updateSummary();
+
+    } else {
+        cartProducts.innerHTML = "<h2>Your cart is empty.</h2>";
     }
 }
 

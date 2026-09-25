@@ -205,41 +205,35 @@ footer {
 }
 
 .cart-container {
-    max-width: 1100px;
-    width: 90%;
+    width: 80%;
     margin: 40px auto;
     display: flex;
-    gap: 30px;
+    gap: 60px;
     align-items: flex-start;
-    justify-content: space-between;
 }
 
 .cart-item {
-    flex: 1 1 65%;
+    width: 50%;
     background-color: white;
     padding: 20px;
     display: flex;
     gap: 30px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-sizing: border-box;
 }
 
 .cart-image {
     width: 200px;
-    flex: 0 0 200px;
 }
 
 .cart-image img {
     width: 100%;
-    height: auto;
-    max-height: 180px;
+    height: 180px;
     object-fit: contain;
 }
 
 .cart-info {
     flex: 1;
-    min-width: 0;
 }
 
 .cart-info h2 {
@@ -247,7 +241,7 @@ footer {
 }
 
 .cart-info input {
-    width: 60px;
+    width: 50px;
     padding: 5px;
 }
 
@@ -257,41 +251,56 @@ footer {
 }
 
 .cart-summary {
-    flex: 0 0 320px;
-    width: 320px;
+    width: 30%;
     background-color: white;
     padding: 20px;
     border: 1px solid #ddd;
     border-radius: 10px;
-    box-sizing: border-box;
+}
+
+/* New styles for cart left/right layout */
+.cart-items {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.cart-item {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.cart-image {
+    width: 160px;
+    flex: 0 0 160px;
+}
+
+.cart-info {
+    flex: 1;
 }
 
 @media (max-width: 800px) {
-
-    .cart-container,
-    .checkout-container {
+    .cart-container {
         flex-direction: column;
         width: 95%;
-        gap: 20px;
+        margin: 20px auto;
+    }
+
+    .cart-items,
+    .cart-summary {
+        width: 100%;
     }
 
     .cart-item {
-        flex-direction: row;
-        padding: 15px;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .cart-image {
-        width: 120px;
-        flex: 0 0 120px;
-    }
-
-    .cart-image img {
-        max-height: 120px;
-    }
-
-    .cart-summary {
         width: 100%;
-        flex: 1 1 auto;
+        flex: none;
     }
 }
 
@@ -397,4 +406,96 @@ footer {
     100% {
         background-image: url("images/carousel_image/3.jpg");
     }
+}
+
+
+
+
+
+/* contact page design  */
+/* Contact Page */
+
+.contact-container {
+    width: 80%;
+    margin: 40px auto;
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.contact-info {
+    width: 40%;
+    background-color: white;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.contact-info h2 {
+    margin-top: 0;
+}
+
+.contact-form {
+    width: 50%;
+    background-color: white;
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.contact-form h2 {
+    margin-top: 0;
+}
+
+.contact-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-form label {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+/* about page design  */
+.about-container {
+    width: 80%;
+    margin: 40px auto;
+}
+
+.about-section {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+
+.about-section h2 {
+    margin-top: 0;
+}
+
+.about-section p {
+    line-height: 1.7;
+    color: #555;
 }
