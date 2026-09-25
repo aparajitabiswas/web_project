@@ -1,4 +1,5 @@
 
+
 // Product information
 const products = {
     tshirt: {
@@ -684,23 +685,236 @@ const products = {
     }
 };
 
-// Get product name from URL
-const urlParams = new URLSearchParams(window.location.search);
-const product = urlParams.get("product");
+// // Get product name from URL
+// const urlParams = new URLSearchParams(window.location.search);
+// const product = urlParams.get("product");
 
-// Get selected product
-const selectedProduct = products[product];
+// // Get selected product
+// const selectedProduct = products[product];
 
-// Show product information
-if (selectedProduct) {
-    document.getElementById("productImage").src = selectedProduct.image;
-    document.getElementById("productImage").alt = selectedProduct.name;
+// // Show product information
+// if (selectedProduct) {
+//     document.getElementById("productImage").src = selectedProduct.image;
+//     document.getElementById("productImage").alt = selectedProduct.name;
 
-    document.getElementById("productName").innerHTML = selectedProduct.name;
-    document.getElementById("productPrice").innerHTML = selectedProduct.price;
-    document.getElementById("productDescription").innerHTML = selectedProduct.description;
-    document.getElementById("productCategory").innerHTML = selectedProduct.category;
-    document.getElementById("productSize").innerHTML = selectedProduct.size;
-    document.getElementById("productColor").innerHTML = selectedProduct.color;
-    document.getElementById("productAvailability").innerHTML = selectedProduct.availability;
+//     document.getElementById("productName").innerHTML = selectedProduct.name;
+//     document.getElementById("productPrice").innerHTML = selectedProduct.price;
+//     document.getElementById("productDescription").innerHTML = selectedProduct.description;
+//     document.getElementById("productCategory").innerHTML = selectedProduct.category;
+//     document.getElementById("productSize").innerHTML = selectedProduct.size;
+//     document.getElementById("productColor").innerHTML = selectedProduct.color;
+//     document.getElementById("productAvailability").innerHTML = selectedProduct.availability;
+// }
+
+// function addToCart() {
+
+//     localStorage.setItem(
+//         "cartProduct",
+//         JSON.stringify(selectedProduct)
+//     );
+
+//     window.location.href = "cart.html";
+// }
+
+// const cartProducts =
+//     document.getElementById("cartProducts");
+
+
+// if (cartProducts) {
+
+//     const savedProduct =
+//         localStorage.getItem("cartProduct");
+
+
+//     if (savedProduct) {
+
+//         const product =
+//             JSON.parse(savedProduct);
+
+
+//         cartProducts.innerHTML = `
+
+//             <div class="product">
+
+//                 <div class="product-image">
+
+//                     <img src="${product.image}"
+//                          alt="${product.name}">
+
+//                 </div>
+
+
+//                 <h3>${product.name}</h3>
+
+//                 <p>Price: ${product.price}</p>
+
+//                 <p>
+//                     Category: ${product.category}
+//                 </p>
+
+//                 <p>
+//                     Quantity:
+//                     <input type="number"
+//                            value="1"
+//                            min="1">
+//                 </p>
+
+
+//                 <button class="button"
+//                         onclick="removeFromCart()">
+
+//                     Remove
+
+//                 </button>
+
+//             </div>
+
+//         `;
+
+//     }
+
+// }
+
+// function removeFromCart() {
+
+//     localStorage.removeItem("cartProduct");
+
+//     location.reload();
+
+// }
+
+
+
+
+
+// ===============================
+// PRODUCT PAGE
+// ===============================
+
+const productImage = document.getElementById("productImage");
+
+if (productImage) {
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get("product");
+
+    const selectedProduct = products[product];
+
+    if (selectedProduct) {
+
+        document.getElementById("productImage").src =
+            selectedProduct.image;
+
+        document.getElementById("productImage").alt =
+            selectedProduct.name;
+
+        document.getElementById("productName").innerHTML =
+            selectedProduct.name;
+
+        document.getElementById("productPrice").innerHTML =
+            selectedProduct.price;
+
+        document.getElementById("productDescription").innerHTML =
+            selectedProduct.description;
+
+        document.getElementById("productCategory").innerHTML =
+            selectedProduct.category;
+
+        document.getElementById("productSize").innerHTML =
+            selectedProduct.size;
+
+        document.getElementById("productColor").innerHTML =
+            selectedProduct.color;
+
+        document.getElementById("productAvailability").innerHTML =
+            selectedProduct.availability;
+
+
+        // Add to Cart
+        window.addToCart = function () {
+
+            localStorage.setItem(
+                "cartProduct",
+                JSON.stringify(selectedProduct)
+            );
+
+            window.location.href = "cart.html";
+        };
+    }
+}
+
+
+// ===============================
+// CART PAGE
+// ===============================
+
+const cartProducts = document.getElementById("cartProducts");
+
+if (cartProducts) {
+
+    const savedProduct =
+        localStorage.getItem("cartProduct");
+
+    if (savedProduct) {
+
+        const product =
+            JSON.parse(savedProduct);
+
+        cartProducts.innerHTML = `
+
+            <div class="cart-item">
+
+                <div class="cart-image">
+                    <img src="${product.image}"
+                         alt="${product.name}">
+                </div>
+
+                <div class="cart-info">
+
+                    <h2>${product.name}</h2>
+
+                    <p>
+                        Category: ${product.category}
+                    </p>
+
+                    <p>
+                        Price: ${product.price}
+                    </p>
+
+                    <label>Quantity:</label>
+
+                    <input type="number"
+                           value="1"
+                           min="1">
+
+                    <br><br>
+
+                    <button class="button"
+                            onclick="removeFromCart()">
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+        `;
+
+    } else {
+
+        cartProducts.innerHTML =
+            "<h2>Your cart is empty.</h2>";
+    }
+}
+
+
+// ===============================
+// REMOVE FROM CART
+// ===============================
+
+function removeFromCart() {
+
+    localStorage.removeItem("cartProduct");
+
+    location.reload();
 }
