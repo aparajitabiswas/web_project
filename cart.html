@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DailyCart - Shopping Cart</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <nav>
+        <h2>DailyCart</h2>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+
+            <li class="dropdown">
+                <a href="#">Categories</a>
+
+                <div class="dropdown-menu">
+                    <a href="fashion.html">Fashion</a>
+                    <a href="grocery.html">Grocery</a>
+                    <a href="home.html">Home Decor</a>
+                    <a href="pets.html">Pet Supplies</a>
+                    <a href="stationery.html">Stationery</a>
+                </div>
+            </li>
+
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+
+    <h1 class="page-title">Shopping Cart</h1>
+
+    <div class="cart-container">
+        <div class="cart-item">
+
+            <div class="cart-image">
+                <img src="images/men_tshirt.jpg" alt="Cotton T-Shirt">
+            </div>
+
+            <div class="cart-info">
+                <h2>Cotton T-Shirt</h2>
+                <p>Category: Fashion</p>
+                <p>Price: &#2547;450</p>
+
+                <label>Quantity:</label>
+                <input type="number" value="1" min="1" ><br><br>
+
+                <p><b>Total: &#2547;450</b></p>
+
+                <a href="#" class="remove">Remove</a>
+            </div>
+
+        </div>
+
+        <div class="cart-summary">
+            <h2>Cart Summary</h2>
+            <p>Subtotal: &#2547;450</p>
+            <p>Delivery: &#2547;60</p>
+            <hr>
+
+            <h3>Total: &#2547;510</h3>
+            <a href="checkout.html" class="button">Checkout</a>
+
+        </div>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 DailyCart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>

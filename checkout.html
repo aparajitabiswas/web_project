@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DailyCart - Checkout</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+ <nav>
+        <h2>DailyCart</h2>
+
+        <ul>
+            <li><a href="index.html">Home</a></li>
+
+            <li class="dropdown">
+                <a href="#">Categories</a>
+
+                <div class="dropdown-menu">
+                    <a href="fashion.html">Fashion</a>
+                    <a href="grocery.html">Grocery</a>
+                    <a href="home.html">Home Decor</a>
+                    <a href="pets.html">Pet Supplies</a>
+                    <a href="stationery.html">Stationery</a>
+                </div>
+            </li>
+
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+
+    <h1 class="page-title">Checkout</h1>
+
+    <div class="checkout-container">
+
+        <div class="checkout-form">
+            <h2>Customer Information</h2>
+
+            <form>
+                <label>Full Name</label>
+                <input type="text" placeholder="Enter your name">
+                <label>Email</label>
+                <input type="email" placeholder="Enter your email">
+
+                <label>Phone Number</label>
+                <input type="text" placeholder="Enter your phone number">
+
+                <label>Address</label>
+                <textarea placeholder="Enter your address"></textarea>
+
+                <h2>Payment Method</h2>
+                <input type="radio" name="payment" value="cod">
+             Cash on Delivery
+                <br>
+                <input type="radio" name="payment" value="bkash">
+             bKash
+
+                <br>
+                <input type="radio" name="payment" value="card">
+                Card Payment
+
+                <br><br>
+
+                <input type="submit" value="Place Order" class="button">
+
+            </form>
+        </div>
+
+        <div class="order-summary">
+
+            <h2>Order Summary</h2>
+            <div class="summary-item">
+                <span>Cotton T-Shirt</span>
+                <span>&#2547;450</span>
+            </div>
+            <div class="summary-item">
+                <span>Delivery</span>
+                <span>&#2547;60</span>
+            </div>
+            <hr>
+            <div class="summary-total">
+                <span>Total</span>
+                <span>&#2547;510</span>
+            </div>
+
+        </div>
+
+    </div>
+    <footer>
+        <p>&copy; 2026 DailyCart. All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
