@@ -1,13 +1,14 @@
-
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>DailyCart - Product Details</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-  <nav>
+    <nav>
         <h2>DailyCart</h2>
 
         <ul>
@@ -32,19 +33,16 @@
     <div class="product-details">
 
         <div class="details-image">
-            <img src="images/men_tshirt.jpg" alt="Cotton T-Shirt">
+            <img id="productImage" src="" alt="product">
         </div>
         <div class="details-info">
-            <h1>Cotton T-Shirt</h1>
-            <p class="price">&#2547;450</p>
-            <p>
-                This is a comfortable cotton t-shirt.
-                It is suitable for everyday use.
-            </p>
-            <p><b>Category:</b> Fashion</p>
-            <p><b>Size:</b> S, M, L, XL</p>
-            <p><b>Color:</b> Black</p>
-            <p><b>Availability:</b> In Stock</p>
+            <h1 id="productName"></h1>
+            <p class="price" id="productPrice"></p>
+            <p id="productDescription"></p>
+            <p> <b>Category:</b> <span id="productCategory"></span> </p>
+            <p> <b>Size:</b> <span id="productSize"></span> </p>
+            <p> <b>Color:</b> <span id="productColor"></span> </p>  
+            <p> <b>Availability:</b> <span id="productAvailability"></span> </p>
             <a href="cart.html" class="button">Add to Cart</a>
             <a href="fashion.html" class="back-button">
                 Back to Fashion
@@ -53,10 +51,114 @@
         </div>
     </div>
 
-   <footer>
+    <footer>
         <p>&copy; 2026 DailyCart. All Rights Reserved.</p>
-</footer>
+    </footer>
 
 </body>
-</html>
 
+<!-- JavaScript -->
+<script>
+    // Product information
+    const products = {
+        tshirt: {
+            name: "Cotton T-Shirt",
+            image: "images/men_tshirt.jpg",
+            price: "৳450",
+            description: "This is a comfortable cotton t-shirt. It is suitable for everyday use.",
+            category: "Fashion",
+            size: "S, M, L, XL",
+            color: "Black",
+            availability: "In Stock"
+        },
+
+        jeans: {
+            name: "Blue Jeans",
+            image: "images/jeans.jpg",
+            price: "৳900",
+            description: "Stylish blue jeans suitable for casual and everyday wear.",
+            category: "Fashion",
+            size: "30, 32, 34, 36",
+            color: "Blue",
+            availability: "In Stock"
+        },
+
+        handbag: {
+            name: "Simple Hand Bag",
+            image: "images/handbag.jpg",
+            price: "৳650",
+            description: "A simple and stylish handbag suitable for everyday use.",
+            category: "Fashion",
+            size: "Medium",
+            color: "Brown",
+            availability: "In Stock"
+        },
+
+        shoes: {
+            name: "Casual Shoes",
+            image: "images/sneakers.jpg",
+            price: "৳1200",
+            description: "Comfortable casual shoes for everyday walking and outdoor use.",
+            category: "Fashion",
+            size: "38, 39, 40, 41, 42",
+            color: "White",
+            availability: "In Stock"
+        },
+
+        kurti: {
+            name: "Stylish Kurti",
+            image: "images/kurti.jpg",
+            price: "৳750",
+            description: "Comfortable casual kurti for everyday wear.",
+            category: "Fashion",
+            size: "38, 39, 40, 41, 42",
+            color: "White, Black, Red, Blue",
+            availability: "In Stock"
+        },
+
+        sunglass: {
+            name: "Sunglass",
+            image: "images/sunglasses.jpg",
+            price: "৳750",
+            description: "Stylish sunglasses suitable for everyday wear and outdoor use..",
+            category: "Fashion",
+            size: "",
+            color: "White, Black",
+            availability: "In Stock"
+        },
+
+        coat: {
+            name: "Winter Coat",
+            image: "images/coat.jpg",
+            price: "৳350",
+            description: "Warm and stylish winter coat suitable for cold weather and everyday wear",
+            category: "Fashion",
+            size: "",
+            color: "White, Black",
+            availability: "In Stock"
+        },
+    };
+
+    // Get product name from URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const product = urlParams.get("product");
+
+    // Get selected product
+    const selectedProduct = products[product];
+
+    // Show product information
+    if (selectedProduct) {
+        document.getElementById("productImage").src = selectedProduct.image;
+        document.getElementById("productImage").alt = selectedProduct.name;
+
+        document.getElementById("productName").innerHTML = selectedProduct.name;
+        document.getElementById("productPrice").innerHTML = selectedProduct.price;
+        document.getElementById("productDescription").innerHTML = selectedProduct.description;
+        document.getElementById("productCategory").innerHTML = selectedProduct.category;
+        document.getElementById("productSize").innerHTML = selectedProduct.size;
+        document.getElementById("productColor").innerHTML = selectedProduct.color;
+        document.getElementById("productAvailability").innerHTML = selectedProduct.availability;
+    }
+</script>
+
+</html>
