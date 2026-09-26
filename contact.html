@@ -21,7 +21,7 @@
 
             <li class="dropdown">
 
-                <a href="#">Categories</a>
+                <a href="">Categories</a>
 
                 <div class="dropdown-menu">
 
@@ -35,17 +35,9 @@
 
             </li>
 
-            <li>
-                <a href="#">About</a>
-            </li>
-
-            <li>
-                <a href="contact.html">Contact</a>
-            </li>
-
-            <li>
-                <a href="cart.html">Cart</a>
-            </li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="cart.html">Cart</a></li>
 
         </ul>
 
@@ -86,24 +78,21 @@
 
             <h2>Send Us a Message</h2>
 
-            <form>
+            <form onsubmit="alert('Message Sent Successfully! We will contact you soon.'); return false;">
 
                 <label>Name</label>
-                <input type="text" placeholder="Enter your name">
+                <input type="text" placeholder="Enter your name" required>
 
                 <label>Email</label>
-                <input type="email" placeholder="Enter your email">
+                <input type="email" placeholder="Enter your email" required>
 
                 <label>Subject</label>
-                <input type="text" placeholder="Enter subject">
+                <input type="text" placeholder="Enter subject" required>
 
                 <label>Message</label>
-                <textarea rows="5"
-                          placeholder="Write your message"></textarea>
+                <textarea rows="5" placeholder="Write your message" required></textarea>
 
-                <button type="submit" class="button">
-                    Send Message
-                </button>
+                <button type="submit" class="button">Send Message</button>
 
             </form>
 
