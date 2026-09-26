@@ -13,9 +13,14 @@ nav {
     padding-right: 30px;
 }
 
-nav h2 {
+
+.shop-name {
     color: white;
     margin-right: 40px;
+    font-size: 35px;
+    font-family: 'Bangers', cursive;
+    font-size: 40px;
+    letter-spacing: 2px;
 }
 
 nav ul {
