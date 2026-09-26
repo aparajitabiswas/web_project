@@ -918,3 +918,46 @@ function removeFromCart() {
 
     location.reload();
 }
+
+
+
+
+
+// ===============================
+// CHECKOUT PAGE
+// ===============================
+
+const checkoutProduct = document.getElementById("checkoutProduct");
+
+if (checkoutProduct) {
+
+    const savedProduct = localStorage.getItem("cartProduct");
+
+    if (savedProduct) {
+
+        const product = JSON.parse(savedProduct);
+
+        // Product price থেকে শুধু number নেওয়া
+        const price = parseInt(
+            String(product.price)
+                .replace(/&#\d+;?/g, '')
+                .replace(/[^0-9]/g, '')
+        ) || 0;
+
+        const delivery = 100;
+        const total = price + delivery;
+
+        // Show product information
+        document.getElementById("checkoutProduct").textContent =
+            product.name;
+
+        document.getElementById("checkoutPrice").textContent =
+            "৳" + price;
+
+        document.getElementById("checkoutDelivery").textContent =
+            "৳" + delivery;
+
+        document.getElementById("checkoutTotal").textContent =
+            "৳" + total;
+    }
+}
