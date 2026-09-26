@@ -36,28 +36,29 @@
         <div class="checkout-form">
             <h2>Customer Information</h2>
 
-            <form>
+            <form onsubmit="alert('Order Placed Successfully!')">
                 <label>Full Name</label>
-                <input type="text" placeholder="Enter your name">
+                <input type="text" placeholder="Enter your name" required>
                 <label>Email</label>
-                <input type="email" placeholder="Enter your email">
+                <input type="email" placeholder="Enter your email" required>
 
                 <label>Phone Number</label>
-                <input type="text" placeholder="Enter your phone number">
+                <!-- <input type="text" placeholder="Enter your phone number" required> -->
+                 <input type="tel" placeholder="Enter your phone number" pattern="[0-9]{11}" required>
 
                 <label>Address</label>
-                <textarea placeholder="Enter your address"></textarea>
+                <textarea placeholder="Enter your address" required></textarea>
 
                 <h2>Payment Method</h2>
-                <input type="radio" name="payment" value="cod">
-             Cash on Delivery
+                <input type="radio" name="payment" value="cod" required>
+                <label for="cod">Cash on Delivery</label>   
                 <br>
-                <input type="radio" name="payment" value="bkash">
-             bKash
+                <input type="radio" name="payment" value="bkash" required>
+                <label for="bkash">bKash</label>
 
                 <br>
-                <input type="radio" name="payment" value="card">
-                Card Payment
+                <input type="radio" name="payment" value="card" required>
+                <label for="card">Card Payment</label>
 
                 <br><br>
 

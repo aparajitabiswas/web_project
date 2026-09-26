@@ -499,3 +499,16 @@ footer {
     line-height: 1.7;
     color: #555;
 }
+
+
+/* phone type nuber design */
+.checkout-form input,
+.checkout-form textarea {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+
