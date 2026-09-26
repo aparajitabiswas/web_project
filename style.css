@@ -343,6 +343,17 @@ footer {
     height: 80px;
 }
 
+.checkout-form input[type="radio"] {
+    width: auto;
+    padding: 0;
+    margin-right: 5px;
+}
+
+.checkout-form input[type="radio"] + label {
+    display: inline;
+    margin: 0;
+}
+
 .order-summary {
     background-color: white;
     width: 30%;
