@@ -685,106 +685,6 @@ const products = {
     }
 };
 
-// // Get product name from URL
-// const urlParams = new URLSearchParams(window.location.search);
-// const product = urlParams.get("product");
-
-// // Get selected product
-// const selectedProduct = products[product];
-
-// // Show product information
-// if (selectedProduct) {
-//     document.getElementById("productImage").src = selectedProduct.image;
-//     document.getElementById("productImage").alt = selectedProduct.name;
-
-//     document.getElementById("productName").innerHTML = selectedProduct.name;
-//     document.getElementById("productPrice").innerHTML = selectedProduct.price;
-//     document.getElementById("productDescription").innerHTML = selectedProduct.description;
-//     document.getElementById("productCategory").innerHTML = selectedProduct.category;
-//     document.getElementById("productSize").innerHTML = selectedProduct.size;
-//     document.getElementById("productColor").innerHTML = selectedProduct.color;
-//     document.getElementById("productAvailability").innerHTML = selectedProduct.availability;
-// }
-
-// function addToCart() {
-
-//     localStorage.setItem(
-//         "cartProduct",
-//         JSON.stringify(selectedProduct)
-//     );
-
-//     window.location.href = "cart.html";
-// }
-
-// const cartProducts =
-//     document.getElementById("cartProducts");
-
-
-// if (cartProducts) {
-
-//     const savedProduct =
-//         localStorage.getItem("cartProduct");
-
-
-//     if (savedProduct) {
-
-//         const product =
-//             JSON.parse(savedProduct);
-
-
-//         cartProducts.innerHTML = `
-
-//             <div class="product">
-
-//                 <div class="product-image">
-
-//                     <img src="${product.image}"
-//                          alt="${product.name}">
-
-//                 </div>
-
-
-//                 <h3>${product.name}</h3>
-
-//                 <p>Price: ${product.price}</p>
-
-//                 <p>
-//                     Category: ${product.category}
-//                 </p>
-
-//                 <p>
-//                     Quantity:
-//                     <input type="number"
-//                            value="1"
-//                            min="1">
-//                 </p>
-
-
-//                 <button class="button"
-//                         onclick="removeFromCart()">
-
-//                     Remove
-
-//                 </button>
-
-//             </div>
-
-//         `;
-
-//     }
-
-// }
-
-// function removeFromCart() {
-
-//     localStorage.removeItem("cartProduct");
-
-//     location.reload();
-
-// }
-
-
-
 
 
 // ===============================
@@ -830,9 +730,13 @@ if (productImage) {
             selectedProduct.availability;
 
 
-        // Add to Cart
+        // ===============================
+        // ADD TO CART
+        // ===============================
+
         window.addToCart = function () {
 
+            // Save product
             localStorage.setItem(
                 "cartProduct",
                 JSON.stringify(selectedProduct)
@@ -851,10 +755,6 @@ if (productImage) {
 const cartProducts = document.getElementById("cartProducts");
 const cartSummary = document.getElementById("cartSummary");
 
-function formatNumber(amount) {
-    return amount;
-}
-
 if (cartProducts) {
 
     const savedProduct = localStorage.getItem("cartProduct");
@@ -863,47 +763,184 @@ if (cartProducts) {
 
         const product = JSON.parse(savedProduct);
 
-        // render left column (items)
+        // If quantity is already saved,
+        // use that quantity. Otherwise use 1.
+        const savedQuantity = product.quantity || 1;
+
+
+        // ===============================
+        // SHOW PRODUCT
+        // ===============================
+
         cartProducts.innerHTML = `
+
             <div class="cart-item">
+
                 <div class="cart-image">
-                    <img src="${product.image}" alt="${product.name}">
+
+                    <img
+                        src="${product.image}"
+                        alt="${product.name}"
+                    >
+
                 </div>
+
+
                 <div class="cart-info">
+
                     <h2>${product.name}</h2>
-                    <p>Category: ${product.category}</p>
-                    <p class="item-price">Price: ${product.price}</p>
+
+                    <p>
+                        Category: ${product.category}
+                    </p>
+
+                    <p class="item-price">
+                        Price: ${product.price}
+                    </p>
+
+
                     <label>Quantity:</label>
-                    <input type="number" class="item-qty" value="1" min="1">
-                    <p class="item-total"><b>Total: ${product.price}</b></p>
-                    <a href="#" class="remove" onclick="removeFromCart()">Remove</a>
+
+                    <input
+                        type="number"
+                        class="item-qty"
+                        value="${savedQuantity}"
+                        min="1"
+                    >
+
+
+                    <p class="item-total">
+                        <b>Total: ৳0</b>
+                    </p>
+
+
+                    <a
+                        href="#"
+                        class="remove"
+                        onclick="removeFromCart()"
+                    >
+                        Remove
+                    </a>
+
                 </div>
+
             </div>
         `;
 
-        // populate summary
-        // remove HTML numeric entities like &#2547; before extracting digits
-        const priceNumeric = parseInt(String(product.price).replace(/&#\d+;?/g, '').replace(/[^0-9]/g, '')) || 0;
-        const qtyInput = document.querySelector('.item-qty');
-        const itemTotalEl = document.querySelector('.item-total');
+
+        // ===============================
+        // PRICE
+        // ===============================
+
+        const priceNumeric = parseInt(
+            String(product.price)
+                .replace(/&#\d+;?/g, '')
+                .replace(/[^0-9]/g, '')
+        ) || 0;
+
+
+        const qtyInput =
+            document.querySelector(".item-qty");
+
+
+        const itemTotalEl =
+            document.querySelector(".item-total");
+
+
+        // ===============================
+        // UPDATE CART SUMMARY
+        // ===============================
 
         function updateSummary() {
-            const qty = parseInt(qtyInput.value) || 1;
-            const subtotal = priceNumeric * qty;
-            const delivery = subtotal > 0 ? 100 : 0;
-            const total = subtotal + delivery;
 
-            cartSummary.querySelector('.summary-subtotal').textContent = `Subtotal: ৳${subtotal}`;
-            cartSummary.querySelector('.summary-delivery').textContent = `Delivery: ৳${delivery}`;
-            cartSummary.querySelector('.summary-total').textContent = `Total: ৳${total}`;
-            itemTotalEl.innerHTML = `<b>Total: ৳${subtotal}</b>`;
+            const qty =
+                parseInt(qtyInput.value) || 1;
+
+
+            const subtotal =
+                priceNumeric * qty;
+
+
+            const delivery =
+                subtotal > 0 ? 100 : 0;
+
+
+            const total =
+                subtotal + delivery;
+
+
+            // Show product total
+
+            itemTotalEl.innerHTML =
+                `<b>Total: ৳${subtotal}</b>`;
+
+
+            // Show cart summary
+
+            cartSummary.querySelector(
+                ".summary-subtotal"
+            ).textContent =
+                `Subtotal: ৳${subtotal}`;
+
+
+            cartSummary.querySelector(
+                ".summary-delivery"
+            ).textContent =
+                `Delivery: ৳${delivery}`;
+
+
+            cartSummary.querySelector(
+                ".summary-total"
+            ).textContent =
+                `Total: ৳${total}`;
+
+
+            // ===============================
+            // SAVE QUANTITY
+            // ===============================
+
+            product.quantity = qty;
+
+            localStorage.setItem(
+                "cartProduct",
+                JSON.stringify(product)
+            );
         }
 
-        qtyInput.addEventListener('input', updateSummary);
+
+        // When quantity changes
+
+        qtyInput.addEventListener(
+            "input",
+            updateSummary
+        );
+
+
+        // Initial calculation
+
         updateSummary();
 
-    } else {
-        cartProducts.innerHTML = "<h2>Your cart is empty.</h2>";
+    }
+
+    else {
+
+        cartProducts.innerHTML =
+            "<h2>Your cart is empty.</h2>";
+
+        cartSummary.querySelector(
+            ".summary-subtotal"
+        ).textContent =
+            "Subtotal: ৳0";
+
+        cartSummary.querySelector(
+            ".summary-delivery"
+        ).textContent =
+            "Delivery: ৳0";
+
+        cartSummary.querySelector(
+            ".summary-total"
+        ).textContent =
+            "Total: ৳0";
     }
 }
 
@@ -914,50 +951,108 @@ if (cartProducts) {
 
 function removeFromCart() {
 
-    localStorage.removeItem("cartProduct");
+    localStorage.removeItem(
+        "cartProduct"
+    );
 
     location.reload();
 }
-
-
-
 
 
 // ===============================
 // CHECKOUT PAGE
 // ===============================
 
-const checkoutProduct = document.getElementById("checkoutProduct");
+const checkoutProduct =
+    document.getElementById("checkoutProduct");
+
 
 if (checkoutProduct) {
 
-    const savedProduct = localStorage.getItem("cartProduct");
+    const savedProduct =
+        localStorage.getItem("cartProduct");
+
 
     if (savedProduct) {
 
-        const product = JSON.parse(savedProduct);
+        const product =
+            JSON.parse(savedProduct);
 
-        // Product price থেকে শুধু number নেওয়া
-        const price = parseInt(
-            String(product.price)
-                .replace(/&#\d+;?/g, '')
-                .replace(/[^0-9]/g, '')
-        ) || 0;
 
-        const delivery = 100;
-        const total = price + delivery;
+        // ===============================
+        // PRICE
+        // ===============================
 
-        // Show product information
-        document.getElementById("checkoutProduct").textContent =
-            product.name;
+        const price =
+            parseInt(
+                String(product.price)
+                    .replace(/&#\d+;?/g, '')
+                    .replace(/[^0-9]/g, '')
+            ) || 0;
 
-        document.getElementById("checkoutPrice").textContent =
-            "৳" + price;
 
-        document.getElementById("checkoutDelivery").textContent =
+        // ===============================
+        // QUANTITY
+        // ===============================
+
+        const quantity =
+            product.quantity || 1;
+
+
+        // ===============================
+        // CALCULATION
+        // ===============================
+
+        const subtotal =
+            price * quantity;
+
+
+        const delivery =
+            subtotal > 0 ? 100 : 0;
+
+
+        const total =
+            subtotal + delivery;
+
+
+        // ===============================
+        // SHOW PRODUCT
+        // ===============================
+
+        document.getElementById(
+            "checkoutProduct"
+        ).textContent =
+            product.name + " × " + quantity;
+
+
+        // ===============================
+        // SHOW SUBTOTAL
+        // ===============================
+
+        document.getElementById(
+            "checkoutPrice"
+        ).textContent =
+            "৳" + subtotal;
+
+
+        // ===============================
+        // SHOW DELIVERY
+        // ===============================
+
+        document.getElementById(
+            "checkoutDelivery"
+        ).textContent =
             "৳" + delivery;
 
-        document.getElementById("checkoutTotal").textContent =
+
+        // ===============================
+        // SHOW TOTAL
+        // ===============================
+
+        document.getElementById(
+            "checkoutTotal"
+        ).textContent =
             "৳" + total;
+
     }
 }
