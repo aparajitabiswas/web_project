@@ -687,10 +687,20 @@ const products = {
 
 
 
-// ===============================
-// PRODUCT PAGE
-// ===============================
 
+
+
+
+
+
+
+
+
+
+
+
+
+// product page er functionality 
 const productImage = document.getElementById("productImage");
 
 if (productImage) {
@@ -702,56 +712,49 @@ if (productImage) {
 
     if (selectedProduct) {
 
-        document.getElementById("productImage").src =
-            selectedProduct.image;
-
-        document.getElementById("productImage").alt =
-            selectedProduct.name;
-
-        document.getElementById("productName").innerHTML =
-            selectedProduct.name;
-
-        document.getElementById("productPrice").innerHTML =
-            selectedProduct.price;
-
-        document.getElementById("productDescription").innerHTML =
-            selectedProduct.description;
-
-        document.getElementById("productCategory").innerHTML =
-            selectedProduct.category;
-
-        document.getElementById("productSize").innerHTML =
-            selectedProduct.size;
-
-        document.getElementById("productColor").innerHTML =
-            selectedProduct.color;
-
-        document.getElementById("productAvailability").innerHTML =
-            selectedProduct.availability;
+        document.getElementById("productImage").src = selectedProduct.image;
+        document.getElementById("productImage").alt = selectedProduct.name;
+        document.getElementById("productName").innerHTML = selectedProduct.name;
+        document.getElementById("productPrice").innerHTML = selectedProduct.price;
+        document.getElementById("productDescription").innerHTML = selectedProduct.description;
+        document.getElementById("productCategory").innerHTML = selectedProduct.category;
+        document.getElementById("productSize").innerHTML = selectedProduct.size;
+        document.getElementById("productColor").innerHTML =  selectedProduct.color;
+        document.getElementById("productAvailability").innerHTML = selectedProduct.availability;
 
 
-        // ===============================
-        // ADD TO CART
-        // ===============================
-
+        
+        // cart a add korar jonno function declear 
         window.addToCart = function () {
 
             // Save product
-            localStorage.setItem(
-                "cartProduct",
-                JSON.stringify(selectedProduct)
-            );
-
+            localStorage.setItem("cartProduct", JSON.stringify(selectedProduct) );
             window.location.href = "cart.html";
         };
     }
 }
 
 
-// ===============================
-// CART PAGE
-// ===============================
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// cart page er functionality 
 const cartProducts = document.getElementById("cartProducts");
 const cartSummary = document.getElementById("cartSummary");
 
@@ -768,137 +771,64 @@ if (cartProducts) {
         const savedQuantity = product.quantity || 1;
 
 
-        // ===============================
-        // SHOW PRODUCT
-        // ===============================
-
+    
+        // ekhon product show korbe 
         cartProducts.innerHTML = `
-
             <div class="cart-item">
-
                 <div class="cart-image">
-
-                    <img
-                        src="${product.image}"
-                        alt="${product.name}"
-                    >
-
+                    <img src="${product.image}" alt="${product.name}">
                 </div>
 
 
                 <div class="cart-info">
-
                     <h2>${product.name}</h2>
-
-                    <p>
-                        Category: ${product.category}
-                    </p>
-
-                    <p class="item-price">
-                        Price: ${product.price}
-                    </p>
-
+                    <p>Category: ${product.category}</p>
+                    <p class="item-price">Price: ${product.price}</p>
 
                     <label>Quantity:</label>
+                    <input type="number" class="item-qty" value="${savedQuantity}" min="1">
 
-                    <input
-                        type="number"
-                        class="item-qty"
-                        value="${savedQuantity}"
-                        min="1"
-                    >
+                    <p class="item-total"><b>Total: ৳0</b></p>
 
-
-                    <p class="item-total">
-                        <b>Total: ৳0</b>
-                    </p>
-
-
-                    <a
-                        href="#"
-                        class="remove"
-                        onclick="removeFromCart()"
-                    >
-                        Remove
-                    </a>
-
+                    <a href="#" class="remove" onclick="removeFromCart()">Remove</a>
                 </div>
-
             </div>
         `;
 
 
-        // ===============================
-        // PRICE
-        // ===============================
-
+    //    price er jonno numeric value ber korbe regular expression (regex) use kore
         const priceNumeric = parseInt(
             String(product.price)
                 .replace(/&#\d+;?/g, '')
                 .replace(/[^0-9]/g, '')
         ) || 0;
 
+        const qtyInput = document.querySelector(".item-qty");
 
-        const qtyInput =
-            document.querySelector(".item-qty");
-
-
-        const itemTotalEl =
-            document.querySelector(".item-total");
+        const itemTotalEl = document.querySelector(".item-total");
 
 
-        // ===============================
-        // UPDATE CART SUMMARY
-        // ===============================
-
+        // summary update korar jonno function declear 
         function updateSummary() {
-
-            const qty =
-                parseInt(qtyInput.value) || 1;
-
-
-            const subtotal =
-                priceNumeric * qty;
-
-
-            const delivery =
-                subtotal > 0 ? 100 : 0;
-
-
-            const total =
-                subtotal + delivery;
+            const qty = parseInt(qtyInput.value) || 1;
+            const subtotal = priceNumeric * qty;
+            const delivery = subtotal > 0 ? 100 : 0;
+            const total = subtotal + delivery;
 
 
             // Show product total
-
-            itemTotalEl.innerHTML =
-                `<b>Total: ৳${subtotal}</b>`;
+            itemTotalEl.innerHTML = `<b>Total: ৳${subtotal}</b>`;
 
 
             // Show cart summary
+            cartSummary.querySelector( ".summary-subtotal" ).textContent = `Subtotal: ৳${subtotal}`;
 
-            cartSummary.querySelector(
-                ".summary-subtotal"
-            ).textContent =
-                `Subtotal: ৳${subtotal}`;
+            cartSummary.querySelector(".summary-delivery").textContent = `Delivery: ৳${delivery}`;
 
-
-            cartSummary.querySelector(
-                ".summary-delivery"
-            ).textContent =
-                `Delivery: ৳${delivery}`;
+            cartSummary.querySelector( ".summary-total" ).textContent = `Total: ৳${total}`;
 
 
-            cartSummary.querySelector(
-                ".summary-total"
-            ).textContent =
-                `Total: ৳${total}`;
-
-
-            // ===============================
-            // SAVE QUANTITY
-            // ===============================
-
+            // quantity save korar jonno product object e quantity add korbe 
             product.quantity = qty;
 
             localStorage.setItem(
@@ -909,7 +839,6 @@ if (cartProducts) {
 
 
         // When quantity changes
-
         qtyInput.addEventListener(
             "input",
             updateSummary
@@ -917,72 +846,61 @@ if (cartProducts) {
 
 
         // Initial calculation
-
         updateSummary();
 
     }
 
     else {
 
-        cartProducts.innerHTML =
-            "<h2>Your cart is empty.</h2>";
-
-        cartSummary.querySelector(
-            ".summary-subtotal"
-        ).textContent =
-            "Subtotal: ৳0";
-
-        cartSummary.querySelector(
-            ".summary-delivery"
-        ).textContent =
-            "Delivery: ৳0";
-
-        cartSummary.querySelector(
-            ".summary-total"
-        ).textContent =
-            "Total: ৳0";
+        cartProducts.innerHTML = "<h2>Your cart is empty.</h2>";
+        cartSummary.querySelector(".summary-subtotal").textContent = "Subtotal: ৳0";
+        cartSummary.querySelector(".summary-delivery").textContent = "Delivery: ৳0";
+        cartSummary.querySelector(".summary-total").textContent = "Total: ৳0";
     }
 }
 
 
-// ===============================
-// REMOVE FROM CART
-// ===============================
-
+// cart theke remove korar jonno function declear 
 function removeFromCart() {
-
     localStorage.removeItem(
         "cartProduct"
     );
-
     location.reload();
 }
 
 
-// ===============================
-// CHECKOUT PAGE
-// ===============================
 
-const checkoutProduct =
-    document.getElementById("checkoutProduct");
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// checkout page er functionality
+const checkoutProduct = document.getElementById("checkoutProduct");
 
 if (checkoutProduct) {
 
-    const savedProduct =
-        localStorage.getItem("cartProduct");
+    const savedProduct = localStorage.getItem("cartProduct");
 
 
     if (savedProduct) {
-
-        const product =
-            JSON.parse(savedProduct);
+        const product = JSON.parse(savedProduct);
 
 
-        // ===============================
-        // PRICE
-        // ===============================
-
+        // price er jonno numeric value ber korbe regular expression (regex) use kore
         const price =
             parseInt(
                 String(product.price)
@@ -991,68 +909,27 @@ if (checkoutProduct) {
             ) || 0;
 
 
-        // ===============================
-        // QUANTITY
-        // ===============================
+        const quantity = product.quantity || 1;
 
-        const quantity =
-            product.quantity || 1;
+        // calculation 
+        const subtotal = price * quantity;
 
+        const delivery =  subtotal > 0 ? 100 : 0;
 
-        // ===============================
-        // CALCULATION
-        // ===============================
+        const total = subtotal + delivery;
 
-        const subtotal =
-            price * quantity;
+        // product show korbe checkout page e 
+        document.getElementById("checkoutProduct").textContent = product.name + " × " + quantity;
 
 
-        const delivery =
-            subtotal > 0 ? 100 : 0;
+        // subtotal show korbe checkout page e 
+        document.getElementById("checkoutPrice").textContent = "৳" + subtotal;
 
+        // delecvery show korbe checkout page e
+        document.getElementById("checkoutDelivery").textContent =  "৳" + delivery;
 
-        const total =
-            subtotal + delivery;
-
-
-        // ===============================
-        // SHOW PRODUCT
-        // ===============================
-
-        document.getElementById(
-            "checkoutProduct"
-        ).textContent =
-            product.name + " × " + quantity;
-
-
-        // ===============================
-        // SHOW SUBTOTAL
-        // ===============================
-
-        document.getElementById(
-            "checkoutPrice"
-        ).textContent =
-            "৳" + subtotal;
-
-
-        // ===============================
-        // SHOW DELIVERY
-        // ===============================
-
-        document.getElementById(
-            "checkoutDelivery"
-        ).textContent =
-            "৳" + delivery;
-
-
-        // ===============================
-        // SHOW TOTAL
-        // ===============================
-
-        document.getElementById(
-            "checkoutTotal"
-        ).textContent =
-            "৳" + total;
+        // total show korbe checkout page e
+        document.getElementById("checkoutTotal").textContent = "৳" + total;
 
     }
 }
