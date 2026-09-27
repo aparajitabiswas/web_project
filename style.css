@@ -520,3 +520,8 @@ footer {
 }
 
 
+.developer{
+    font-size: 14px;
+    color: #ccc;
+    font-style: italic;
+}
